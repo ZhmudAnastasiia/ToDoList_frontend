@@ -1,0 +1,6 @@
+body, html{
+  background-color: #E0DEFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

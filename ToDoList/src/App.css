@@ -1,0 +1,45 @@
+
+.page {
+  gap: 10px;
+  width: 100%;
+  height: 90vh;
+  background-color: #E0DEFF;
+  overflow: hidden; 
+}
+
+.main_logo {
+  width: 16%;
+  height: auto;
+}
+
+.main_text {
+  font-family: "BioRhyme", serif;
+  font-size: 3vw;
+}
+
+.Task_window {
+  width: 90%;
+  background-color: #F5F4FF;
+  border-radius: 32px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto; 
+  max-height: 80%; 
+  overflow-x: hidden;
+}
+
+.header {
+  margin-left: 5%;
+  display: flex;
+}
+
+.container {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 90%;
+  flex-direction: column;
+}
