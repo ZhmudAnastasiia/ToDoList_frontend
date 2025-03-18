@@ -1,4 +1,12 @@
 {
+  "compilerOptions": {
+    "jsx": "react-jsx", // This enables JSX support for React 17+ projects
+    "module": "commonjs", // Ensure you're using commonjs if you're not using ESM
+    "target": "esnext", // Optional, but ensures you're using the latest TypeScript features
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },

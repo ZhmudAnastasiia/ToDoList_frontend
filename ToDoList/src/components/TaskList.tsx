@@ -221,16 +221,23 @@ function TaskList() {
       const response = await fetch(`http://localhost:5175/api/Task/${id}`, {
         method: 'DELETE',
       });
-
+  
       if (!response.ok) {
         throw new Error('Failed to delete task');
       }
-
-      setTasks((prevState) => prevState.filter((task) => task.id !== id));
+  
+      console.log('Task deleted successfully');
+      // Оновлення стану, щоб видалити задачу з локального стану
+      setTasks((prevState) => {
+        const newState = prevState.filter((task) => task.id !== id);
+        console.log('Updated tasks:', newState); // Логування нового стану
+        return newState;
+      });
     } catch (error) {
       console.error('Error deleting task:', error);
     }
   };
+  
 
   return (
     <div className="task-list-container">
@@ -272,57 +279,65 @@ function TaskList() {
       </div>
 
       {isEditing && (
-        <div className="modal-overlay">
+        <div className="modal-overlay" role = "dialog">
           <div className="modal-window">
             <h2>{newTask.id === 0 ? 'Add Task' : 'Edit Task'}</h2>
             <form onSubmit={handleFormSubmit}>
               <div>
-                <label>Title:</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={newTask.name}
-                  onChange={handleInputChange}
-                  required
-                />
-                {errors.name && <span className="error">{errors.name}</span>}
-              </div>
+  <label htmlFor="name">Title:</label>
+  <input
+    id="name"  // Додано id
+    type="text"
+    name="name"
+    value={newTask.name}
+    onChange={handleInputChange}
+    required
+  />
+  {errors.name && <span className="error">{errors.name}</span>}
+</div>
+
+<div>
+  <label htmlFor="dueDate">Time:</label>
+  <input
+    id="dueDate"  // Added the id here
+    name="dueDate"
+    type="datetime-local"
+    value={newTask.dueDate}
+    onChange={handleInputChange}
+    required
+  />
+  {errors.dueDate && <span className="error">{errors.dueDate}</span>}
+</div>
+
+<div>
+  <label htmlFor="status">Status:</label>
+  <select
+    id="status"  // Added the id here
+    name="status"
+    required
+    value={newTask.status}
+    onChange={handleInputChange}
+  >
+    <option value="">Select status</option>
+    <option value="ToDo">To Do</option>
+    <option value="InProgress">In Progress</option>
+    <option value="Done">Done</option>
+  </select>
+  {errors.status && <span className="error">{errors.status}</span>}
+</div>
+
               <div>
-                <label>Time:</label>
-                <input
-                  type="datetime-local"
-                  name="dueDate"
-                  value={newTask.dueDate}
-                  onChange={handleInputChange}
-                  required
-                />
-                {errors.dueDate && <span className="error">{errors.dueDate}</span>}
-              </div>
-              <div>
-                <label>Status:</label>
-                <select
-                  name="status"
-                  value={newTask.status}
-                  onChange={handleInputChange}
-                  required
-                >
-                  <option value="">Select status</option>
-                  <option value="ToDo">To Do</option>
-                  <option value="InProgress">In Progress</option>
-                  <option value="Done">Done</option>
-                </select>
-                {errors.status && <span className="error">{errors.status}</span>}
-              </div>
-              <div>
-                <label>Description:</label>
-                <textarea
-                  name="description"
-                  value={newTask.description}
-                  onChange={handleInputChange}
-                  required
-                />
-                {errors.description && <span className="error">{errors.description}</span>}
-              </div>
+  <label htmlFor="description">Description:</label>
+  <textarea
+    id="description"  // Added the id here
+    name="description"
+    value={newTask.description}
+    onChange={handleInputChange}
+    required
+  />
+  {errors.description && <span className="error">{errors.description}</span>}
+</div>
+
               <button type="submit">{newTask.id === 0 ? 'Add Task' : 'Update Task'}</button>
             </form>
 
